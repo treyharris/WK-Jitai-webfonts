@@ -169,16 +169,23 @@ function setToDefaultFont(fontName) {
 
 $(document).ready(function() {
     $characterSpan = $('#character span');
-    var defaultFont = $characterSpan.css('font-family') + ' !important';
+    var defaultFont = $characterSpan.css('font-family');
     
     // Add hover style, to allow hovering away weird fonts.
     var $hoverStyle = $('<style/>', {'type': 'text/css'});
-    $hoverStyle.text("#character span:hover {font-family: " + defaultFont + ";}");
-    $('head').append($hoverStyle);
+    var hoverCss = "#character span:hover {font-family: " + defaultFont + " !important;}"
     
     // Make sure page doesn't jump around on hover.
-    $('#character').css('height', $('#character').css('line-height'));
+    // The different heights here are equal to the different line-heights.
+    hoverCss += " #question #character {height: 1.6em;}";
+    hoverCss += " #question #character.vocabulary {height: 3.21em;}"
+    hoverCss += " @media (max-width: 767px) {"
+    hoverCss += " #question #character {height: 2.4em;}"
+    hoverCss += " #question #character.vocabulary {height: 4.85em;}"
+    hoverCss += "}"
     
+    $hoverStyle.text(hoverCss);
+    $('head').append($hoverStyle);
     
     // answerChecker.evaluate is only called when checking the answer, which
     // is why we catch it, check for the "proceed to correct/incorrect display"
@@ -205,6 +212,4 @@ $(document).ready(function() {
         }
         return ret;
     };
-    
-    setToRandomFont();
 });
