@@ -131,7 +131,7 @@ function canRepresentGlyphs(fontName, glyphs) {
 }
 
 function shuffle(arr) {
-    for (var i = arr.length;; i > 0) {
+    for (var i = arr.length; i > 0;) {
         var otherIndex = Math.floor(Math.random() * i);
         i--;
         
@@ -140,26 +140,6 @@ function shuffle(arr) {
         arr[otherIndex] = temp;
     }
     return arr;
-}
-
-function shuffle(array) {
-    let counter = array.length;
-
-    // While there are elements in the array
-    while (counter > 0) {
-        // Pick a random index
-        let index = Math.floor(Math.random() * counter);
-
-        // Decrease counter by 1
-        counter--;
-
-        // And swap the last element with it
-        let temp = array[counter];
-        array[counter] = array[index];
-        array[index] = temp;
-    }
-
-    return array;
 }
 
 var $characterSpan;
