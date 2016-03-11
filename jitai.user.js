@@ -1,9 +1,12 @@
 // ==UserScript==
-// @name        Random WaniKani fonts
-// @namespace   http://obskyr.io/
-// @description Display WaniKani reviews in randomized fonts, for more varied reading training.
-// @include     /^https?://(www\.)?wanikani\.com/review/session/?$/
+// @name        Jitai
 // @version     1.0.0
+// @description Display WaniKani reviews in randomized fonts, for more varied reading training.
+// @author      Samuel (@obskyr)
+// @namespace   http://obskyr.io/
+// @homepageURL https://gist.github.com/obskyr/9f3c77cf6bf663792c6e
+// @icon        http://i.imgur.com/7uScPR4.png
+// @include     /^https?://(www\.)?wanikani\.com/review/session/?$/
 // @grant       none
 // ==/UserScript==
 
