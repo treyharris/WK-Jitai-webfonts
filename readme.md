@@ -10,7 +10,7 @@ I would recommend taking a look at these fonts, and installing the ones you'd li
 * [Darts Font](http://www.freejapanesefont.com/darts-font-handwriting-font-download/)
 * [San Choume Font](http://www.freejapanesefont.com/sanchoume-handwriting-font-download/)
 * [FC Flower](http://www.freejapanesefont.com/fc-flower-handwriting-font/)
-* [Armed Banana](http://www.freejapanesefont.com/armed-banana-download/)
+* [Armed Banana](http://www.freejapanesefont.com/armed-banana-download/) (this one is seriously absurd - I highly recommend it)
 * [Hakusyu Kaisho Bold](http://www.freejapanesefont.com/hakusyu-kaisho-bold-calligraphy/)
 * [Nagayama Kai](http://www.freejapanesefont.com/nagayama-kai-calligraphy-font-download/)
 * [Cinecaption](http://www.freejapanesefont.com/cinecaption/)
