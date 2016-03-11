@@ -95,8 +95,6 @@ function fontExists(fontName) {
     context.font = "72px " + fontName + ", monospace";
     var testWidth = context.measureText(text).width;
     
-    delete canvas;
-    
     return testWidth != defaultWidth;
 }
 
@@ -123,9 +121,6 @@ function canRepresentGlyphs(fontName, glyphs) {
         }
         context.clearRect(0, 0, canvas.width, canvas.height);
     }
-    
-    delete canvas;
-    delete blank;
     
     return result;
 }
@@ -156,7 +151,7 @@ function setToRandomFont(glyphs) {
     if (glyphs) {
         var currentFont = [];
         for (var i = 0; i < randomlyOrdered.length; i++) {
-            var fontName = randomlyOrdered[i]
+            var fontName = randomlyOrdered[i];
             if (canRepresentGlyphs(fontName, glyphs)) {
                 currentFont.push(fontName);
             }
@@ -198,7 +193,7 @@ $(document).ready(function() {
         }
         
         return result;
-    }
+    };
     
     // $.jStorage.set('currentItem') is only called right when switching to a
     // new question, which is why we hook into it to randomize the font at the
@@ -210,7 +205,7 @@ $(document).ready(function() {
             setToRandomFont(value.kan || value.voc || value.rad);
         }
         return ret;
-    }
+    };
     
     setToRandomFont();
 });
