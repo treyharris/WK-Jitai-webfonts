@@ -56,6 +56,7 @@ var fonts = [
     "nagayama_kai",
     "A-OTF Shin Maru Go Pro",
     "Hosofuwafont",
+    "ChihayaGothic",
     "chifont",
     "'chifont+'",
     "darts font",
@@ -63,6 +64,8 @@ var fonts = [
     "FC-Flower",
     "ArmedBanana", // This one is completely absurd. I recommend it.
     "HakusyuKaisyoExtraBold_kk",
+    "aoyagireisyosimo2, AoyagiKouzanFont2OTF",
+    "S2G Nagurigaki font, S2G Nagurigaki font-PRO, nagurigaki, nagurigaki-P",
     
     // Add your fonts here!
     "Fake font name that you can change",
