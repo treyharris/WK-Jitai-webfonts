@@ -30,8 +30,9 @@ I would recommend taking a look at these fonts, and installing the ones you'd li
 * Hiragino Kaku Gothic Pro
 * Hiragino Maru Gothic Pro
 * Hiragino Mincho Pro
-* Hannotate
-* HanziPen
+* Hannotate TC
+* HanziPen TC
+* Kaiti TC
 
 ## Common Linux fonts
 

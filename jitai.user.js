@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        Jitai
-// @version     1.0.0
+// @version     1.1.0
 // @description Display WaniKani reviews in randomized fonts, for more varied reading training.
 // @author      Samuel (@obskyr)
 // @namespace   http://obskyr.io/
@@ -30,8 +30,9 @@ var fonts = [
     "Hiragino Kaku Gothic Pro",
     "Hiragino Maru Gothic Pro",
     "Hiragino Mincho Pro",
-    "Hannotate",
-    "HanziPen",
+    "Hannotate TC",
+    "HanziPen TC",
+    "Kaiti TC",
     
     // Common Linux fonts
     "Takao Gothic, TakaoGothic",
@@ -136,80 +137,95 @@ function shuffle(arr) {
     return arr;
 }
 
-var $characterSpan;
-function setToRandomFont(glyphs) {
-    // The font is set as a randomly shuffled list of the existing fonts
-    // in order to always show a random font, even if the first one chosen
-    // doesn't have a certain glyph being attempted to be displayed.
-    var randomlyOrdered = shuffle(existingFonts.slice());
-    
-    // Some fonts don't contain certain radicals, for example, so it's best
-    // to check that the font used can represent all the glyphs. The reason
-    // the browser can't switch automatically is that some fonts report that
-    // they  have a glyph, when in fact they just show up blank.
-    if (glyphs) {
-        var currentFont = [];
-        for (var i = 0; i < randomlyOrdered.length; i++) {
-            var fontName = randomlyOrdered[i];
-            if (canRepresentGlyphs(fontName, glyphs)) {
-                currentFont.push(fontName);
+var jitai = {
+    setToRandomFont: function(glyphs) {
+        // The font is set as a randomly shuffled list of the existing fonts
+        // in order to always show a random font, even if the first one chosen
+        // doesn't have a certain glyph being attempted to be displayed.
+        var randomlyOrdered = shuffle(existingFonts.slice());
+        
+        // Some fonts don't contain certain radicals, for example, so it's best
+        // to check that the font used can represent all the glyphs. The reason
+        // the browser can't switch automatically is that some fonts report that
+        // they have a glyph, when in fact they just show up blank.
+        if (glyphs) {
+            var currentFont = [];
+            for (var i = 0; i < randomlyOrdered.length; i++) {
+                var fontName = randomlyOrdered[i];
+                if (canRepresentGlyphs(fontName, glyphs)) {
+                    currentFont.push(fontName);
+                }
             }
+        } else {
+            var currentFont = randomlyOrdered;
         }
-    } else {
-        var currentFont = randomlyOrdered;
-    }
+        
+        currentFont = currentFont.join(', ');
+        this.currentFont = currentFont;
+        
+        jitai.setHoverFont(jitai.defaultFont);
+        this.$characterSpan.css('font-family', currentFont);
+    },
     
-    currentFont = currentFont.join(', ');
-    $characterSpan.css('font-family', currentFont);
-}
-
-function setToDefaultFont(fontName) {
-    $characterSpan.css('font-family', '');
+    setToDefaultFont: function(fontName) {
+        jitai.setHoverFont(jitai.currentFont);
+        this.$characterSpan.css('font-family', '');
+    },
+    
+    setHoverFont: function(fontName) {
+        this.$hoverStyle.text("#character span:hover {font-family: " + fontName + " !important;}");
+    },
+    
+    init: function() {      
+        this.$characterSpan = $('#character span');
+        this.defaultFont = this.$characterSpan.css('font-family');
+        
+        this.$hoverStyle = $('<style/>', {'type': 'text/css'});
+        $('head').append(this.$hoverStyle);
+        
+        // answerChecker.evaluate is only called when checking the answer, which
+        // is why we catch it, check for the "proceed to correct/incorrect display"
+        // condition, and set the font back to default if it's a non-stopping answer.
+        var oldEvaluate = answerChecker.evaluate;
+        answerChecker.evaluate = function(questionType, answer) {
+            var result = oldEvaluate.apply(this, [questionType, answer]);
+            
+            if (!result.exception) {
+                jitai.setToDefaultFont();
+            }
+            
+            return result;
+        };
+        
+        // $.jStorage.set('currentItem') is only called right when switching to a
+        // new question, which is why we hook into it to randomize the font at the
+        // exact right time: when a new item shows up.
+        var oldSet = $.jStorage.set;
+        $.jStorage.set = function(key, value, options) {
+            var ret = oldSet.apply(this, [key, value, options]);
+            if (key === 'currentItem') {
+                jitai.setToRandomFont(value.kan || value.voc || value.rad);
+            }
+            return ret;
+        };
+    }
 }
 
 $(document).ready(function() {
-    $characterSpan = $('#character span');
-    var defaultFont = $characterSpan.css('font-family');
-    
-    // Add hover style, to allow hovering away weird fonts.
-    var $hoverStyle = $('<style/>', {'type': 'text/css'});
-    var hoverCss = "#character span:hover {font-family: " + defaultFont + " !important;}"
+    jitai.init();
     
     // Make sure page doesn't jump around on hover.
+    var $heightStyle = $('<style/>', {'type': 'text/css'});
+    var heightCss = "";
+    
     // The different heights here are equal to the different line-heights.
-    hoverCss += " #question #character {height: 1.6em;}";
-    hoverCss += " #question #character.vocabulary {height: 3.21em;}"
-    hoverCss += " @media (max-width: 767px) {"
-    hoverCss += " #question #character {height: 2.4em;}"
-    hoverCss += " #question #character.vocabulary {height: 4.85em;}"
-    hoverCss += "}"
+    heightCss += " #question #character {height: 1.6em;}";
+    heightCss += " #question #character.vocabulary {height: 3.21em;}";
+    heightCss += " @media (max-width: 767px) {";
+    heightCss += " #question #character {height: 2.4em;}";
+    heightCss += " #question #character.vocabulary {height: 4.85em;}";
+    heightCss += "}";
     
-    $hoverStyle.text(hoverCss);
-    $('head').append($hoverStyle);
-    
-    // answerChecker.evaluate is only called when checking the answer, which
-    // is why we catch it, check for the "proceed to correct/incorrect display"
-    // condition, and set the font back to default if it's a non-stopping answer.
-    var oldEvaluate = answerChecker.evaluate;
-    answerChecker.evaluate = function(questionType, answer) {
-        var result = oldEvaluate.apply(this, [questionType, answer]);
-        
-        if (!result.exception) {
-            setToDefaultFont();
-        }
-        
-        return result;
-    };
-    
-    // $.jStorage.set('currentItem') is only called right when switching to a
-    // new question, which is why we hook into it to randomize the font at the
-    // exact right time: when a new item shows up.
-    var oldSet = $.jStorage.set;
-    $.jStorage.set = function(key, value, options) {
-        var ret = oldSet.apply(this, [key, value, options]);
-        if (key === 'currentItem') {
-            setToRandomFont(value.kan || value.voc || value.rad);
-        }
-        return ret;
-    };
+    $heightStyle.text(heightCss);
+    $('head').append($heightStyle);
 });
