@@ -4,6 +4,8 @@
 
 I would recommend taking a look at these fonts, and installing the ones you'd like. Once installed, Jitai will automatically use them. I, personally, have them all installed - it's a good mix!
 
+Jitai will only use any given font for words where it has all the kanji in it, so don't be afraid of installing fonts that only contain a limited subset of kanji - it can't hurt. Go wild!
+
 * [Hoso Fuwa Font](http://www.freejapanesefont.com/hoso-fuwa-font-download/)
 * [Chihaya Gothic](http://www.freejapanesefont.com/chihaya-gothic-%E3%81%A1%E3%81%AF%E3%82%84%E3%82%B4%E3%82%B7%E3%83%83%E3%82%AF/)
 * [chifont / chifont+](http://www.freejapanesefont.com/chihaya-font-download/)
