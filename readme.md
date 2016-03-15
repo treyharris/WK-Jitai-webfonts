@@ -57,4 +57,4 @@ I would recommend taking a look at these fonts, and installing the ones you'd li
 * A-OTF Shin Maru Go Pro
 * A-OTF Jun Pro
 * [Aoyagi Kouzan](http://cooltext.com/Download-Font-%E9%9D%92%E6%9F%B3%E8%A1%A1%E5%B1%B1+Aoyagi+Kouzan)
-* [nagurigaki](http://cooltext.com/Download-Font-%E6%AE%B4%E3%82%8A%E6%9B%B8%E3%81%8D+nagurigaki)
+* [aquafont](http://cooltext.com/Download-Font-%E3%81%82%E3%81%8F%E3%81%82+aqua)
