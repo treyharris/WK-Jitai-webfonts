@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        Jitai
-// @version     1.2.0
+// @version     1.2.1
 // @description Display WaniKani reviews in randomized fonts, for more varied reading training.
 // @author      Samuel (@obskyr)
 // @namespace   http://obskyr.io/
@@ -20,16 +20,16 @@
 
 var fonts = [
     // Default Windows fonts
-    "Meiryo",
-    "MS Gothic",
-    "MS Mincho",
+    "Meiryo, メイリオ",
+    "MS PGothic, ＭＳ Ｐゴシック, MS Gothic, ＭＳ ゴック",
+    "MS PMincho, ＭＳ Ｐ明朝, MS Mincho, ＭＳ 明朝",
     "Yu Gothic, YuGothic",
     "Yu Mincho, YuMincho",
     
     // Default OS X fonts
-    "Hiragino Kaku Gothic Pro",
-    "Hiragino Maru Gothic Pro",
-    "Hiragino Mincho Pro",
+    "Hiragino Kaku Gothic Pro, ヒラギノ角ゴ Pro W3",
+    "Hiragino Maru Gothic Pro, ヒラギノ丸ゴ Pro W3",
+    "Hiragino Mincho Pro, ヒラギノ明朝 Pro W3",
     
     // Common Linux fonts
     "Takao Gothic, TakaoGothic",
