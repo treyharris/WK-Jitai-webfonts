@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name        Jitai
-// @version     1.2.1
+// @version     1.3.0
 // @description Display WaniKani reviews in randomized fonts, for more varied reading training.
 // @author      Samuel (@obskyr)
 // @namespace   http://obskyr.io/
 // @homepageURL https://gist.github.com/obskyr/9f3c77cf6bf663792c6e
-// @icon        http://i.imgur.com/7uScPR4.png
+// @icon        http://i.imgur.com/qyuR9bD.png
 // @include     /^https?://(www\.)?wanikani\.com/review/session/?$/
 // @grant       none
 // ==/UserScript==
@@ -148,19 +148,19 @@ var jitai = {
         // to check that the font used can represent all the glyphs. The reason
         // the browser can't switch automatically is that some fonts report that
         // they have a glyph, when in fact they just show up blank.
+        var currentFont;
         if (glyphs) {
-            var currentFont = [];
             for (var i = 0; i < randomlyOrdered.length; i++) {
                 var fontName = randomlyOrdered[i];
                 if (canRepresentGlyphs(fontName, glyphs)) {
-                    currentFont.push(fontName);
+                    currentFont = fontName;
+                    break;
                 }
             }
         } else {
-            var currentFont = randomlyOrdered;
+            currentFont = randomlyOrdered.join(', ');
         }
         
-        currentFont = currentFont.join(', ');
         this.currentFont = currentFont;
         
         jitai.setHoverFont(jitai.defaultFont);
@@ -221,11 +221,11 @@ $(document).ready(function() {
     var heightCss = "";
     
     // The different heights here are equal to the different line-heights.
-    heightCss += " #question #character {height: 1.6em;}";
-    heightCss += " #question #character.vocabulary {height: 3.21em;}";
-    heightCss += " @media (max-width: 767px) {";
-    heightCss += " #question #character {height: 2.4em;}";
-    heightCss += " #question #character.vocabulary {height: 4.85em;}";
+    heightCss += "#question #character {height: 1.6em;}";
+    heightCss += "#question #character.vocabulary {height: 3.21em;}";
+    heightCss += "@media (max-width: 767px) {";
+    heightCss += "    #question #character {height: 2.4em;}";
+    heightCss += "    #question #character.vocabulary {height: 4.85em;}";
     heightCss += "}";
     
     $heightStyle.text(heightCss);
