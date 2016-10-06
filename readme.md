@@ -15,7 +15,7 @@ Jitai will only use any given font for words where it has all the kanji in it, s
 * [Armed Banana](http://www.freejapanesefont.com/armed-banana-download/) (this one is seriously absurd - I highly recommend it)
 * [Hakusyu Kaisho Bold](http://www.freejapanesefont.com/hakusyu-kaisho-bold-calligraphy/)
 * [Nagayama Kai](http://www.freejapanesefont.com/nagayama-kai-calligraphy-font-download/)
-* [Cinecaption](http://www.freejapanesefont.com/cinecaption/)
+* [Cinecaption](http://www.jref.com/resources/cinecaption.85/#resourceInfo) (original source gone, mirror)
 
 ---
 
@@ -58,5 +58,5 @@ Jitai will only use any given font for words where it has all the kanji in it, s
 
 * A-OTF Shin Maru Go Pro
 * A-OTF Jun Pro
-* [Aoyagi Kouzan](http://cooltext.com/Download-Font-%E9%9D%92%E6%9F%B3%E8%A1%A1%E5%B1%B1+Aoyagi+Kouzan)
-* [aquafont](http://cooltext.com/Download-Font-%E3%81%82%E3%81%8F%E3%81%82+aqua)
+* [Aoyagi Kouzan](http://www.jref.com/resources/aoyagi-kouzan.90/#resourceInfo)
+* [aquafont](www.jref.com/resources/aquafont.91/#resourceInfo)
