@@ -8,7 +8,7 @@ Jitai will only use any given font for words where it has all the kanji in it, s
 
 * [Hoso Fuwa Font](http://www.freejapanesefont.com/hoso-fuwa-font-download/)
 * [Chihaya Gothic](http://www.freejapanesefont.com/chihaya-gothic-%E3%81%A1%E3%81%AF%E3%82%84%E3%82%B4%E3%82%B7%E3%83%83%E3%82%AF/)
-* [chifont / chifont+](http://www.freejapanesefont.com/chihaya-font-download/)
+* [chifont / chifont+](http://welina.holy.jp/font/tegaki/nchif/) (original source gone, mirror - bottom download link)
 * [Darts Font](http://www.freejapanesefont.com/darts-font-handwriting-font-download/)
 * [San Choume Font](http://www.freejapanesefont.com/sanchoume-handwriting-font-download/)
 * [FC Flower](http://www.freejapanesefont.com/fc-flower-handwriting-font/)
@@ -45,7 +45,7 @@ Jitai will only use any given font for words where it has all the kanji in it, s
 * [Ume Gothic](https://launchpad.net/ubuntu/+source/fonts-horai-umefont) (`apt-get install fonts-horai-umefont`)
 * [Ume Mincho](https://launchpad.net/ubuntu/+source/fonts-horai-umefont) (`apt-get install fonts-horai-umefont`)
 
-## [EPSON families](http://www.epson.jp/download2/readme/3.0/ttf30.htm) (download and run `ttf30.exe`)
+## [EPSON families](http://www.epson.jp/download2/readme/3.0/ttf30.htm) (download and run the `.exe`)
 
 * EPSON 行書体Ｍ
 * EPSON 正楷書体Ｍ
@@ -59,4 +59,4 @@ Jitai will only use any given font for words where it has all the kanji in it, s
 * A-OTF Shin Maru Go Pro
 * A-OTF Jun Pro
 * [Aoyagi Kouzan](http://www.jref.com/resources/aoyagi-kouzan.90/#resourceInfo)
-* [aquafont](www.jref.com/resources/aquafont.91/#resourceInfo)
+* [aquafont](http://www.jref.com/resources/aquafont.91/#resourceInfo)
