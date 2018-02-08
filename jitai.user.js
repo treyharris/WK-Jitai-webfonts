@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        Jitai
-// @version     1.3.0
+// @version     1.3.1
 // @description Display WaniKani reviews in randomized fonts, for more varied reading training.
 // @author      Samuel (@obskyr)
 // @namespace   http://obskyr.io/
@@ -25,12 +25,12 @@ var fonts = [
     "MS PMincho, ＭＳ Ｐ明朝, MS Mincho, ＭＳ 明朝",
     "Yu Gothic, YuGothic",
     "Yu Mincho, YuMincho",
-    
+
     // Default OS X fonts
     "Hiragino Kaku Gothic Pro, ヒラギノ角ゴ Pro W3",
     "Hiragino Maru Gothic Pro, ヒラギノ丸ゴ Pro W3",
     "Hiragino Mincho Pro, ヒラギノ明朝 Pro W3",
-    
+
     // Common Linux fonts
     "Takao Gothic, TakaoGothic",
     "Takao Mincho, TakaoMincho",
@@ -41,7 +41,7 @@ var fonts = [
     "Dejima Mincho",
     "Ume Gothic",
     "Ume Mincho",
-    
+
     // Other Japanese fonts people use.
     // You might want to try some of these!
     "EPSON 行書体Ｍ",
@@ -63,7 +63,7 @@ var fonts = [
     "HakusyuKaisyoExtraBold_kk",
     "aoyagireisyosimo2, AoyagiKouzanFont2OTF",
     "aquafont",
-    
+
     // Add your fonts here!
     "Fake font name that you can change",
     "Another fake font name",
@@ -85,13 +85,13 @@ function fontExists(fontName) {
     var canvas = document.createElement('canvas');
     var context = canvas.getContext("2d");
     var text = "wim-—l~ツ亻".repeat(100); // Characters with widths that often vary between fonts.
-    
+
     context.font = "72px monospace";
     var defaultWidth = context.measureText(text).width;
-    
+
     context.font = "72px " + fontName + ", monospace";
     var testWidth = context.measureText(text).width;
-    
+
     return testWidth != defaultWidth;
 }
 
@@ -106,9 +106,9 @@ function canRepresentGlyphs(fontName, glyphs) {
     blank.width = canvas.width;
     blank.height = canvas.height;
     var blankDataUrl = blank.toDataURL();
-    
+
     context.font = "24px " + fontName;
-    
+
     var result = true;
     for (var i = 0; i < glyphs.length; i++) {
         context.fillText(glyphs[i], 0, 0);
@@ -118,23 +118,8 @@ function canRepresentGlyphs(fontName, glyphs) {
         }
         context.clearRect(0, 0, canvas.width, canvas.height);
     }
-    
-    return result;
-}
 
-function shuffle(arr) {
-    // WaniKani Reorder Ultimate overwrites Math.random(!?), so this
-    // next line is required for Jitai to work in conjunction with it.
-    var random = Math.randomB || Math.random;
-    for (var i = arr.length; i > 0;) {
-        var otherIndex = Math.floor(random() * i);
-        i--;
-        
-        var temp = arr[i];
-        arr[i] = arr[otherIndex];
-        arr[otherIndex] = temp;
-    }
-    return arr;
+    return result;
 }
 
 var jitai = {
@@ -142,8 +127,8 @@ var jitai = {
         // The font is set as a randomly shuffled list of the existing fonts
         // in order to always show a random font, even if the first one chosen
         // doesn't have a certain glyph being attempted to be displayed.
-        var randomlyOrdered = shuffle(existingFonts.slice());
-        
+        var randomlyOrdered = this.getShuffledFonts();
+
         // Some fonts don't contain certain radicals, for example, so it's best
         // to check that the font used can represent all the glyphs. The reason
         // the browser can't switch automatically is that some fonts report that
@@ -160,54 +145,78 @@ var jitai = {
         } else {
             currentFont = randomlyOrdered.join(', ');
         }
-        
+
         this.currentFont = currentFont;
-        
+
         jitai.setHoverFont(jitai.defaultFont);
         this.$characterSpan.css('font-family', currentFont);
     },
-    
-    setToDefaultFont: function(fontName) {
+
+    setToDefaultFont: function() {
         jitai.setHoverFont(jitai.currentFont);
         this.$characterSpan.css('font-family', '');
     },
-    
+
     setHoverFont: function(fontName) {
         this.$hoverStyle.text("#character span:hover {font-family: " + fontName + " !important;}");
     },
-    
-    init: function() {      
+
+    getShuffledFonts: function() {
+        // This shouldn't have to be part of the Jitai object,
+        // but ituses Jitai's local copy of Math.random, so
+        // this is pretty much the most reasonable way to do it.
+        var fonts = existingFonts.slice();
+        for (var i = fonts.length; i > 0;) {
+            var otherIndex = Math.floor(this.random() * i);
+            i--;
+
+            var temp = fonts[i];
+            fonts[i] = fonts[otherIndex];
+            fonts[otherIndex] = temp;
+        }
+        return fonts;
+    },
+
+    init: function() {
+        // Reorder scripts seem to like overwriting Math.random(!?), so this
+        // workaround is required for Jitai to work in conjunction with them.
+        var iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+        this.random = iframe.contentWindow.Math.random;
+        iframe.parentNode.removeChild(iframe);
+
         this.$characterSpan = $('#character span');
         this.defaultFont = this.$characterSpan.css('font-family');
-        
+
         this.$hoverStyle = $('<style/>', {'type': 'text/css'});
         $('head').append(this.$hoverStyle);
-        
+
         // answerChecker.evaluate is only called when checking the answer, which
         // is why we catch it, check for the "proceed to correct/incorrect display"
         // condition, and set the font back to default if it's a non-stopping answer.
         var oldEvaluate = answerChecker.evaluate;
         answerChecker.evaluate = function(questionType, answer) {
             var result = oldEvaluate.apply(this, [questionType, answer]);
-            
+
             if (!result.exception) {
                 jitai.setToDefaultFont();
             }
-            
+
             return result;
         };
-        
+
         // $.jStorage.set('currentItem') is only called right when switching to a
         // new question, which is why we hook into it to randomize the font at the
         // exact right time: when a new item shows up.
         var oldSet = $.jStorage.set;
         $.jStorage.set = function(key, value, options) {
             var ret = oldSet.apply(this, [key, value, options]);
-            
+
             if (key === 'currentItem') {
                 jitai.setToRandomFont(value.kan || value.voc || value.rad);
             }
-            
+
             return ret;
         };
     }
@@ -215,11 +224,11 @@ var jitai = {
 
 $(document).ready(function() {
     jitai.init();
-    
+
     // Make sure page doesn't jump around on hover.
     var $heightStyle = $('<style/>', {'type': 'text/css'});
     var heightCss = "";
-    
+
     // The different heights here are equal to the different line-heights.
     heightCss += "#question #character {height: 1.6em;}";
     heightCss += "#question #character.vocabulary {height: 3.21em;}";
@@ -227,7 +236,7 @@ $(document).ready(function() {
     heightCss += "    #question #character {height: 2.4em;}";
     heightCss += "    #question #character.vocabulary {height: 4.85em;}";
     heightCss += "}";
-    
+
     $heightStyle.text(heightCss);
     $('head').append($heightStyle);
 });
