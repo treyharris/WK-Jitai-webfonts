@@ -25,7 +25,7 @@ var fonts = [
     "MS PMincho, ＭＳ Ｐ明朝, MS Mincho, ＭＳ 明朝",
     "Yu Gothic, YuGothic",
     "Yu Mincho, YuMincho",
-    
+
     // Default OS X fonts
     "Hiragino Kaku Gothic Pro, ヒラギノ角ゴ Pro W3",
     "Hiragino Maru Gothic Pro, ヒラギノ丸ゴ Pro W3",
