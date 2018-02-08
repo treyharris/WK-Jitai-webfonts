@@ -3,6 +3,8 @@
 // @version     1.3.1
 // @description Display WaniKani reviews in randomized fonts, for more varied reading training.
 // @author      Samuel (@obskyr)
+// @copyright   2016-2018, obskyr
+// @license     MIT
 // @namespace   http://obskyr.io/
 // @homepageURL https://gist.github.com/obskyr/9f3c77cf6bf663792c6e
 // @icon        http://i.imgur.com/qyuR9bD.png
