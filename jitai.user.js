@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        Jitai
-// @version     1.3.1
+// @version     1.3.2
 // @description Display WaniKani reviews in randomized fonts, for more varied reading training.
 // @author      Samuel (@obskyr)
 // @copyright   2016-2018, obskyr
@@ -85,13 +85,19 @@ function fontExists(fontName) {
     // Approach from kirupa.com/html5/detect_whether_font_is_installed.htm - thanks!
     // Will return false for the browser's default monospace font, sadly.
     var canvas = document.createElement('canvas');
-    var context = canvas.getContext("2d");
+    var context = canvas.getContext('2d');
     var text = "wim-—l~ツ亻".repeat(100); // Characters with widths that often vary between fonts.
 
     context.font = "72px monospace";
     var defaultWidth = context.measureText(text).width;
 
-    context.font = "72px " + fontName + ", monospace";
+    // Microsoft Edge raises an error when a context's font is set to a string
+    // containing certain special characters... so that needs to be handled.
+    try {
+        context.font = "72px " + fontName + ", monospace";
+    } catch (e) {
+        return false;
+    }
     var testWidth = context.measureText(text).width;
 
     return testWidth != defaultWidth;
@@ -165,7 +171,7 @@ var jitai = {
 
     getShuffledFonts: function() {
         // This shouldn't have to be part of the Jitai object,
-        // but ituses Jitai's local copy of Math.random, so
+        // but it uses Jitai's local copy of Math.random, so
         // this is pretty much the most reasonable way to do it.
         var fonts = existingFonts.slice();
         for (var i = fonts.length; i > 0;) {
@@ -183,10 +189,10 @@ var jitai = {
         // Reorder scripts seem to like overwriting Math.random(!?), so this
         // workaround is required for Jitai to work in conjunction with them.
         var iframe = document.createElement('iframe');
+        iframe.className = 'jitai-workaround-for-reorder-script-compatibility';
         iframe.style.display = 'none';
         document.body.appendChild(iframe);
         this.random = iframe.contentWindow.Math.random;
-        iframe.parentNode.removeChild(iframe);
 
         this.$characterSpan = $('#character span');
         this.defaultFont = this.$characterSpan.css('font-family');
