@@ -1,21 +1,23 @@
 # List of supported fonts and download links
 
-## Fonts from [freejapanesefont.com](http://www.freejapanesefont.com/)
+## Fonts at some point found on [freejapanesefont.com](http://www.freejapanesefont.com/)
+
+(But, obscure Japanese links have a tendency of breaking, and a lot of these have moved. If you see a broken link, please tell me in the forum thread!)
 
 I would recommend taking a look at these fonts, and installing the ones you'd like. Once installed, Jitai will automatically use them. I, personally, have them all installed - it's a good mix!
 
 Jitai will only use any given font for words where it has all the kanji in it, so don't be afraid of installing fonts that only contain a limited subset of kanji - it can't hurt. Go wild!
 
-* [Hoso Fuwa Font](http://www.freejapanesefont.com/hoso-fuwa-font-download/)
-* [Chihaya Gothic](http://www.freejapanesefont.com/chihaya-gothic-%E3%81%A1%E3%81%AF%E3%82%84%E3%82%B4%E3%82%B7%E3%83%83%E3%82%AF/)
-* [chifont / chifont+](http://welina.holy.jp/font/tegaki/nchif/) (original source gone, mirror - bottom download link)
-* [Darts Font](http://www.freejapanesefont.com/darts-font-handwriting-font-download/)
-* [San Choume Font](http://www.freejapanesefont.com/sanchoume-handwriting-font-download/)
+* [Hoso Fuwa Font](https://huwahuwa.ff-design.net/%e3%81%bb%e3%81%9d%e3%81%b5%e3%82%8f%e3%83%95%e3%82%a9%e3%83%b3%e3%83%88/)
+* [Chihaya Gothic](https://welina.xyz/font/tegaki/gothic/)
+* [chifont / chifont+](https://welina.xyz/font/tegaki/nchif/) (bottom download link - top won't work)
+* [Darts Font](https://www.p-darts.jp/items/dartsfont.zip)
+* [San Choume Font](http://web.archive.org/web/20190330133455/http://www.geocities.jp/bokurano_yume/)
 * [FC Flower](http://www.freejapanesefont.com/fc-flower-handwriting-font/)
 * [Armed Banana](http://www.freejapanesefont.com/armed-banana-download/) (this one is seriously absurd - I highly recommend it)
 * [Hakusyu Kaisho Bold](http://www.freejapanesefont.com/hakusyu-kaisho-bold-calligraphy/)
 * [Nagayama Kai](http://www.freejapanesefont.com/nagayama-kai-calligraphy-font-download/)
-* [Cinecaption](http://www.jref.com/resources/cinecaption.85/#resourceInfo) (original source gone, mirror)
+* [Cinecaption](http://www.jref.com/resources/cinecaption.85/#resourceInfo)
 
 ---
 
