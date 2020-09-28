@@ -13,7 +13,7 @@ Jitai will only use any given font for words where it has all the kanji in it, s
 * [chifont / chifont+](https://welina.xyz/font/tegaki/nchif/) (bottom download link - top won't work)
 * [Darts Font](https://www.p-darts.jp/items/dartsfont.zip)
 * [San Choume Font](http://web.archive.org/web/20190330133455/http://www.geocities.jp/bokurano_yume/)
-* [FC Flower](http://www.freejapanesefont.com/fc-flower-handwriting-font/)
+* [FC Flower](https://en.m.fontke.com/font/13945090/)
 * [Armed Banana](http://www.freejapanesefont.com/armed-banana-download/) (this one is seriously absurd - I highly recommend it)
 * [Hakusyu Kaisho Bold](http://www.freejapanesefont.com/hakusyu-kaisho-bold-calligraphy/)
 * [Nagayama Kai](http://www.freejapanesefont.com/nagayama-kai-calligraphy-font-download/)
